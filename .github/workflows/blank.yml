@@ -27,11 +27,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
       - name: Set up Python ${{ matrix.python-version }} # Name of an action that sets up Python.
-        uses: actions/setup-python@v3 # A pre-built GitHub Action that sets up a Python environment.
+        uses: actions/setup-python@v2 # A pre-built GitHub Action that sets up a Python environment.
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies # The first step that isn't just calling another action.
