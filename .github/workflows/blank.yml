@@ -39,6 +39,6 @@ jobs:
           python -m pip install --upgrade pip # Upgrade pip to the latest version.
           pip install pytest # Install pytest.
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi # If we have a requirements.txt, then install it.
-#       - name: Test with pytest # Final action which runs pytest. If any test fails, then this Action fails.
-#         run: |
-#           pytest
+      - name: Test with pytest # Final action which runs pytest. If any test fails, then this Action fails.
+        run: |
+          pytest
