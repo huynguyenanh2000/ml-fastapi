@@ -1,0 +1,5 @@
+[core]
+    remote = s3
+    autostage = false
+['remote "s3"']
+    url = s3://ml-fastapi
