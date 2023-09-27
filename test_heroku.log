@@ -4,3 +4,14 @@
 2023-09-27 22:11:57,579 Status code: 503
 2023-09-27 22:14:39,932 Testing Heroku app
 2023-09-27 22:14:39,933 Status code: 503
+2023-09-27 22:27:23,085 Testing Heroku app
+2023-09-27 22:27:23,085 Status code: 503
+2023-09-27 22:30:58,305 Testing Heroku app
+2023-09-27 22:30:58,306 Status code: 503
+2023-09-27 22:32:12,366 Testing Heroku app
+2023-09-27 22:32:12,366 Status code: 200
+2023-09-27 22:32:12,366 Response body: {'prediction': '<=50K'}
+2023-09-27 22:34:07,828 Testing Heroku app
+2023-09-27 22:34:07,828 Status code: 503
+2023-09-27 22:36:59,555 Testing Heroku app
+2023-09-27 22:36:59,555 Status code: 503
