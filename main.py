@@ -51,10 +51,30 @@ class DataInput(BaseModel):
     capital_loss: int
     hours_per_week: int
 
+    class config:
+        schema_extra = {
+            "example": {
+                "age": 36,
+                "workclass": "Private",
+                "fnlgt": 302146,
+                "education": "HS-grad",
+                "education_num": 9,
+                "marital_status": "Divorced",
+                "occupation": "Craft-repair",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "capital_gain": 2000,
+                "capital_loss": 0,
+                "hours_per_week": 45,
+                "native_country": "United-States"
+            }
+        }
+
 @app.get("/")
 async def root():
     return {
-        "message": "Hello World"
+        "message": "Welcome to the Adult Income Prediction API"
     }
 
 # ...
