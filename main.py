@@ -16,12 +16,15 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
-# Load the encoder and label binarizer
-encoder = joblib.load('./model/encoder.pkl')
-lb = joblib.load('./model/lb.pkl')
+# Load the data and model when the module is imported, not each time the app runs.
+def load_resources():
+    encoder = joblib.load('./model/encoder.pkl')
+    lb = joblib.load('./model/lb.pkl')
+    model = joblib.load('./model/logistic-regression.sav')
+    return encoder, lb, model
 
-# Load the model
-model = joblib.load('./model/logistic-regression.sav')
+encoder, lb, model = load_resources()
+
 
 
 app = FastAPI()
@@ -81,45 +84,50 @@ async def root():
 # /predict Endpoint
 @app.post("/predict")
 async def predict(data: DataInput):
-    dat = {
-        "age": [data.age],
-        "workclass": [data.workclass],
-        "fnlgt": [data.fnlgt],
-        "education": [data.education],
-        "education_num": [data.education_num],
-        "marital_status": [data.marital_status],
-        "occupation": [data.occupation],
-        "relationship": [data.relationship],
-        "race": [data.race],
-        "sex": [data.sex],
-        "capital_gain": [data.capital_gain],
-        "capital_loss": [data.capital_loss],
-        "hours_per_week": [data.hours_per_week],
-        "native_country": [data.native_country],
-    }
+    try:
+        dat = {
+            "age": [data.age],
+            "workclass": [data.workclass],
+            "fnlgt": [data.fnlgt],
+            "education": [data.education],
+            "education_num": [data.education_num],
+            "marital_status": [data.marital_status],
+            "occupation": [data.occupation],
+            "relationship": [data.relationship],
+            "race": [data.race],
+            "sex": [data.sex],
+            "capital_gain": [data.capital_gain],
+            "capital_loss": [data.capital_loss],
+            "hours_per_week": [data.hours_per_week],
+            "native_country": [data.native_country],
+        }
 
-    df = pd.DataFrame(dat)
+        df = pd.DataFrame(dat)
 
-    # Ensure categorical fields are treated as strings in DataFrame
-    categorical_fields = ["workclass", "education", "marital_status", "occupation", "relationship", "race", "sex", "native_country"]
-    for field in categorical_fields:
-        df[field] = df[field].astype(str)
+        # Ensure categorical fields are treated as strings in DataFrame
+        categorical_fields = ["workclass", "education", "marital_status", "occupation", "relationship", "race", "sex", "native_country"]
+        for field in categorical_fields:
+            df[field] = df[field].astype(str)
 
-    # Use the correct order of categorical fields for the LabelBinarizer
-    X, _, _, _ = process_data(df, categorical_features=categorical_fields, encoder=encoder, lb=lb, training=False)
+        # Use the correct order of categorical fields for the LabelBinarizer
+        X, _, _, _ = process_data(df, categorical_features=categorical_fields, encoder=encoder, lb=lb, training=False)
 
-    prediction = inference(model, X)
+        prediction = inference(model, X)
 
-    # Inverse transform the prediction using the LabelBinarizer
-    pred = lb.inverse_transform(prediction)
+        # Inverse transform the prediction using the LabelBinarizer
+        pred = lb.inverse_transform(prediction)
 
-    return {
-        "prediction": pred[0]
-    }
+        return {
+            "prediction": pred[0]
+        }
+
+    except Exception as e:
+        return {"error": str(e)}
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    is_on_heroku = 'DYNO' in os.environ
+    uvicorn.run("main:app", host="0.0.0.0" if is_on_heroku else "127.0.0.1", port=int(os.environ.get('PORT', 8000)), reload=not is_on_heroku)
 
 
 
