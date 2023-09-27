@@ -25,7 +25,7 @@ features = {
 }
 
 
-app_url = "https://ml-fastapi-96af12f40f4e.herokuapp.com/"
+app_url = "https://incomeprediction-9d48d87d6ca0.herokuapp.com/"
 
 r = requests.post(app_url, json=features)
 print(r.status_code)

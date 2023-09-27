@@ -18,7 +18,7 @@ def test_get_root():
     """Test the root endpoint."""
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+    assert response.json() == {"message": "Welcome to the Adult Income Prediction API"}
 
 def test_post_predict1():
     """Test the predict endpoint with label >50k."""
