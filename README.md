@@ -36,6 +36,8 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 * Add your <a href="https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions" target="_blank">AWS credentials to the Action</a>.
 * Set up <a href="https://github.com/iterative/setup-dvc" target="_blank">DVC in the action</a> and specify a command to `dvc pull`.
 
+![continuous integration](./images/continuous_integration.png) 
+
 ## Data
 
 * Download census.csv from the data folder in the starter repository.
@@ -63,6 +65,10 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
     * Hint: the data has names with hyphens and Python does not allow those as variable names. Do not modify the column names in the csv and instead use the functionality of FastAPI/Pydantic/etc to deal with this.
 * Write 3 unit tests to test the API (one for the GET and two for POST, one that tests each prediction).
 
+![live_get](./images/live_get.png)
+
+![live_post](./images/live_post.png)
+
 ## API Deployment
 
 * Create a free Heroku account (for the next steps you can either use the web GUI or download the Heroku CLI).
@@ -73,3 +79,5 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 * Set up DVC on Heroku using the instructions contained in the starter directory.
 * Set up access to AWS on Heroku, if using the CLI: `heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy`
 * Write a script that uses the requests module to do one POST on your live API.
+
+[!continuous deployment](./images/continuous_deloyment.png)
