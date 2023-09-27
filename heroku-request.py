@@ -28,9 +28,9 @@ features = {
 app_url = "https://incomeprediction-9d48d87d6ca0.herokuapp.com/"
 
 r = requests.post(app_url, json=features)
-print(r.status_code)
+# print(r.status_code)
 # assert r.status_code == 200
 
-# logging.info("Testing Heroku app")
-# logging.info(f"Status code: {r.status_code}")
-# logging.info(f"Response body: {r.json()}")
+logging.info("Testing Heroku app")
+logging.info(f"Status code: {r.status_code}")
+logging.info(f"Response body: {r.json()}")
