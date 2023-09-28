@@ -68,6 +68,8 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
     * Hint: the data has names with hyphens and Python does not allow those as variable names. Do not modify the column names in the csv and instead use the functionality of FastAPI/Pydantic/etc to deal with this.
 * Write 3 unit tests to test the API (one for the GET and two for POST, one that tests each prediction). 
 
+![example](./images/example.png)
+
 ![live_get](./images/live_get.png)
 
 ![live_post](./images/live_post.png)
