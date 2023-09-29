@@ -39,6 +39,10 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 * Add your <a href="https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions" target="_blank">AWS credentials to the Action</a>.
 * Set up <a href="https://github.com/iterative/setup-dvc" target="_blank">DVC in the action</a> and specify a command to `dvc pull`.
 
+![pytest in github action](./images/pytest_github_action.png)
+
+![github action](./images/github_action.png)
+
 ![continuous integration](./images/continuous_integration.png) 
 
 ## Data
