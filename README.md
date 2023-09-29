@@ -76,6 +76,8 @@ To use your new S3 bucket from the AWS CLI you will need to create an IAM user w
 
 ![live_get](./images/live_get.png)
 
+![heroku_request](./images/heroku_request.png)
+
 ![live_post](./images/live_post.png)
 
 * The path to the file that contains your test cases for the GET() and POST() methods: ./tests/test_api.py
